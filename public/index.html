@@ -2,7 +2,11 @@
 <html lang="en">
     <head>
         <title>Repeat Until Dead: A Game about Life</title>
+        <meta charset="utf-8" />
         <style>
+            body {
+                font-size: 18px;
+            }
             main {
                 display: flex;
                 flex-direction: column;
@@ -15,16 +19,16 @@
     </head>
     <body>
         <main>
-            <section id="description">
-                <h3></h3>
-                <p></p>
+            <section>
+                <ul data-messages></ul>
+                <h3 data-location-name></h3>
+                <p data-description></p>
             </section>
-            <section id="actions">
+            <section data-actions>
             </section>
-            <section id="status">
-                Name: Character Name
+            <section data-status>
             </section>
         </main>
-        <script src="game.js"></script>
+        <script async src="game.js"></script>
     </body>
 </html>

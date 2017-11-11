@@ -1,19 +1,20 @@
 {
   "name": "RepeatUntilDeath",
   "version": "0.0.1",
-  "description": "A browser game",
-  "main": "index.js",
-  "author": "Ryan Kelley",
-  "license": "GPL",
+  "description": "A browser game about life",
+  "author": "Ryan Kelley <ryanakelley@gmail.com> (https://github.com/rakelley)",
+  "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "webpack": "^3.8.1"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack -p --progress",
+    "watch": "webpack -d --watch"
   },
   "browserslist": [
     ">2% in US",

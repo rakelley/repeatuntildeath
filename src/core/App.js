@@ -1,6 +1,7 @@
 import Start from 'locations/Start';
 import SuddenDeath from 'chances/SuddenDeath';
 import UI from 'core/UI';
+import {getCharacter, destroyCharacter} from 'character/Character';
 
 /**
  * Main game class
@@ -13,7 +14,7 @@ class App {
 
     /**
      * Checks if a chance has already been registered
-     * 
+     *
      * @param  {Chance} chance
      * @return {Boolean}
      */
@@ -23,7 +24,7 @@ class App {
 
     /**
      * Registers a new chance-based trigger
-     * 
+     *
      * @param  {Chance} chance
      * @return {void}
      */
@@ -33,7 +34,7 @@ class App {
 
     /**
      * Checks if an environment has already been registered
-     * 
+     *
      * @param  {Environment} environment
      * @return {Boolean}
      */
@@ -43,7 +44,7 @@ class App {
 
     /**
      * Registers a new environment
-     * 
+     *
      * @param  {Environment} environment
      * @return {void}
      */
@@ -96,6 +97,7 @@ class App {
      * @return {void}
      */
     restart() {
+        destroyCharacter();
         this.setDefault();
     }
 
@@ -122,18 +124,24 @@ class App {
         this.environments = [];
         /**
          * Current environment character is in
-         * 
+         *
          * @private
          * @type {?Environment}
          */
         this.currentEnv = null;
         /**
          * Previous environment character was in
-         * 
+         *
          * @private
          * @type {?Environment}
          */
         this.lastEnv = null;
+        /**
+         * Current character
+         *
+         * @type {!Character}
+         */
+        this.character = getCharacter();
 
         this.registerChance(SuddenDeath);
         this.changeEnvironment(Start);
@@ -146,7 +154,7 @@ class App {
      * @return {void}
      */
     renderEnvironment() {
-        UI.render(this.currentEnv);
+        UI.render(this.currentEnv, this.character);
     }
 }
 

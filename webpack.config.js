@@ -1,8 +1,7 @@
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: ['babel-polyfill', './src/main.js'],
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'game.js'
@@ -11,7 +10,7 @@ module.exports = {
     modules: [
       path.resolve(__dirname, 'src'),
       path.resolve(__dirname, 'node_modules'),
-    ]        
+    ]
   },
   module: {
     rules: [
@@ -26,13 +25,5 @@ module.exports = {
         }
       }
     ]
-  },
-  plugins: [
-    new UglifyJSPlugin({
-      test: /\.js$/,
-      exclude: /(node_modules)/,
-      sourceMap: true,
-      mangle: false
-    })
-  ]
+  }
 };
