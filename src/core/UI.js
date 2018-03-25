@@ -70,7 +70,7 @@ export default class UI {
             const button = document.createElement('button');
             button.textContent = action.description;
             button.addEventListener('click', function() {
-                app.performAction(action.callback);
+                app.performAction(action);
             });
             this.actions.appendChild(button);
         });

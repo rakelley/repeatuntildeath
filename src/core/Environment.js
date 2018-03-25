@@ -41,6 +41,10 @@ export default class Environment {
      * @return {Action[]}
      */
     get actions() {
+        if (typeof this._actions === 'function') {
+            this.actions = this._actions();
+        }
+
         return this._actions;
     }
 

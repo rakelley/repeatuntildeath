@@ -4,10 +4,12 @@ import Action from 'actions/Action';
  * Action for starting a new game
  */
 export default class Restart extends Action {
-    constructor(app) {
+    constructor() {
         super();
 
         this._description = 'Begin anew';
-        this._callback = app.restart.bind(app);
+        this._callback = function(app) {
+            app.restart();
+        };
     }
 }

@@ -1,5 +1,4 @@
 import Event from 'events/Event';
-import Restart from 'actions/Restart';
 
 export default class DeathByHeartAttack extends Event {
     constructor(restartAction) {

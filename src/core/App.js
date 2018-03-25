@@ -44,18 +44,29 @@ export default class App {
      * Performs a game action
      *
      * @public
-     * @param  {Function} callable Action to perform
+     * @param  {Action} action Action to perform
      * @return {void}
      */
-    performAction(callable) {
-        callable();
+    performAction(action) {
+        action.callback(this);
 
-        let event = null;
+        let globalEvent = null;
         for (let i = 0, len = this.chances.length; i < len; ++i) {
-            event = this.chances[i].trigger();
-            if (event) {
-                this.changeEnvironment(event);
-                break;
+            globalEvent = this.chances[i].trigger();
+            if (globalEvent) {
+                this.changeEnvironment(globalEvent);
+                this.renderEnvironment();
+                return;
+            }
+        }
+
+        let actionEvent = null;
+        for (let i = 0, len = action.chances.length; i < len; ++i) {
+            actionEvent = action.chances[i].trigger();
+            if (actionEvent) {
+                this.changeEnvironment(actionEvent);
+                this.renderEnvironment();
+                return;
             }
         }
 

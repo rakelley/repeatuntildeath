@@ -2,6 +2,12 @@
  * Base class for actions performable in environments
  */
 export default class Action {
+    constructor() {
+        this._description = '';
+        this._callback = function() {};
+        this._chances = [];
+    }
+
     /**
      * Accessor for action description
      *
@@ -20,5 +26,15 @@ export default class Action {
      */
     get callback() {
         return this._callback;
+    }
+
+    /**
+     * Accessor for action-specific random triggers
+     *
+     * @public
+     * @return {Chance[]}
+     */
+    get chances() {
+        return this._chances;
     }
 }
