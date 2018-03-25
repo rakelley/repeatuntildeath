@@ -1,13 +1,21 @@
-import Start from 'locations/Start';
-import SuddenDeath from 'chances/SuddenDeath';
-import UI from 'core/UI';
 import {getCharacter, destroyCharacter} from 'character/Character';
 
 /**
  * Main game class
  */
-class App {
-    constructor() {
+export default class App {
+    /**
+     * @param  {UI}       ui
+     * @param  {Location} startLocation
+     * @param  {Chance[]} defaultChances
+     * 
+     * @return {void}
+     */
+    init(ui, startLocation, defaultChances) {
+        this._defaultChances = defaultChances;
+        this._startLocation = startLocation;
+        this._ui = ui;
+
         this.setDefault();
         this.renderEnvironment();
     }
@@ -30,26 +38,6 @@ class App {
      */
     registerChance(chance) {
         this.chances.push(chance);
-    }
-
-    /**
-     * Checks if an environment has already been registered
-     *
-     * @param  {Environment} environment
-     * @return {Boolean}
-     */
-    hasEnvironment(environment) {
-        return this.environments.includes(environment);
-    }
-
-    /**
-     * Registers a new environment
-     *
-     * @param  {Environment} environment
-     * @return {void}
-     */
-    registerEnvironment(environment) {
-        this.environments.push(environment);
     }
 
     /**
@@ -82,10 +70,6 @@ class App {
      * @return {void}
      */
     changeEnvironment(environment) {
-        if (!this.hasEnvironment(environment)) {
-            this.registerEnvironment(environment);
-        }
-
         this.lastEnv = this.currentEnv;
         this.currentEnv = environment;
     }
@@ -116,13 +100,6 @@ class App {
          */
         this.chances = [];
         /**
-         * List of registered environments
-         *
-         * @private
-         * @type {Environment[]}
-         */
-        this.environments = [];
-        /**
          * Current environment character is in
          *
          * @private
@@ -143,8 +120,8 @@ class App {
          */
         this.character = getCharacter();
 
-        this.registerChance(SuddenDeath);
-        this.changeEnvironment(Start);
+        this._defaultChances.forEach(this.registerChance.bind(this));
+        this.changeEnvironment(this._startLocation);
     }
 
     /**
@@ -154,10 +131,6 @@ class App {
      * @return {void}
      */
     renderEnvironment() {
-        UI.render(this.currentEnv, this.character);
+        this._ui.render(this, this.currentEnv, this.character);
     }
 }
-
-const app = new App();
-
-export default app;

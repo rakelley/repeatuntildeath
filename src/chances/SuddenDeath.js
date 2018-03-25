@@ -1,21 +1,23 @@
 import Chance from 'chances/Chance';
-import HeartAttack from 'events/DeathByHeartAttack';
 
 /**
  * Chance-based trigger for sudden spontaneous deaths
  */
-class SuddenDeath extends Chance {
+export default class SuddenDeath extends Chance {
+    constructor(heartAttackEvent) {
+        super();
+
+        this._heartAttack = heartAttackEvent;
+    }
+
     /**
      * @inheritDoc
      */
     trigger() {
         if (this.shouldHappen(1000000)) {
-            return HeartAttack;
+            return this._heartAttack;
         }
 
         return null;
     }
 }
-
-const death = new SuddenDeath();
-export default death;

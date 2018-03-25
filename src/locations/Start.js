@@ -1,12 +1,10 @@
-import Navigate from 'actions/Navigate';
 import Location from 'locations/Location';
-import TownSquare from 'locations/TownSquare';
 
 /**
  * Starting location for new games
  */
-class Start extends Location {
-    constructor() {
+export default class Start extends Location {
+    constructor(NavigateFactory, TownSquare) {
         super();
 
         this.name = 'The outskirts of a modest village';
@@ -17,9 +15,6 @@ class Start extends Location {
         that you stop.  Your old life is gone forever, and what hope you may
         have of a new one here is uncertain.  You will your feet to carry you a
         little further.`;
-        this.actions = [Navigate('Enter Town', TownSquare)];
+        this.actions = [NavigateFactory.create('Enter Town', TownSquare)];
     }
 }
-
-const start = new Start();
-export default start;

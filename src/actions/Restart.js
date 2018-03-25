@@ -1,19 +1,13 @@
 import Action from 'actions/Action';
-import App from 'core/App';
 
 /**
  * Action for starting a new game
  */
-class Restart extends Action {
-    constructor() {
+export default class Restart extends Action {
+    constructor(app) {
         super();
 
         this._description = 'Begin anew';
-        this._callback = function() {
-            App.restart();
-        };
+        this._callback = app.restart.bind(app);
     }
 }
-
-const restart = new Restart();
-export default restart;

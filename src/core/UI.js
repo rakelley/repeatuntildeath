@@ -1,6 +1,5 @@
-import App from 'core/App';
 
-class UI {
+export default class UI {
     constructor() {
         this.name = document.querySelector('[data-location-name]');
         this.description = document.querySelector('[data-description]');
@@ -12,14 +11,15 @@ class UI {
     /**
      * Updates UI state
      *
+     * @param  {App}      app
      * @param  {Environment} environment Current environment
      * @param  {Character}   character   Current character
      * @return {void}
      */
-    render(environment, character) {
+    render(app, environment, character) {
         this.setDescription(environment.name, environment.description);
 
-        this.setActions(environment.actions);
+        this.setActions(app, environment.actions);
 
         this.displayStatus(character);
     }
@@ -58,10 +58,11 @@ class UI {
      * Sets the actions currently available to choose
      *
      * @private
+     * @param  {App}      app
      * @param  {Action[]} actions
      * @return {void}
      */
-    setActions(actions) {
+    setActions(app, actions) {
         while (this.actions.children.length) {
             this.actions.removeChild(this.actions.children[0]);
         }
@@ -69,7 +70,7 @@ class UI {
             const button = document.createElement('button');
             button.textContent = action.description;
             button.addEventListener('click', function() {
-                App.performAction(action.callback);
+                app.performAction(action.callback);
             });
             this.actions.appendChild(button);
         });
@@ -96,6 +97,3 @@ class UI {
         this.status.appendChild(invLabel);
     }
 }
-
-const ui = new UI();
-export default ui;
