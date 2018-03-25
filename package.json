@@ -5,12 +5,16 @@
   "author": "Ryan Kelley <ryanakelley@gmail.com> (https://github.com/rakelley)",
   "license": "GPL-3.0",
   "private": true,
+  "dependencies": {
+    "bottlejs": "^1.7.0"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
-    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "webpack": "^3.8.1"
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13"
   },
   "scripts": {
     "build": "webpack -p --progress",
